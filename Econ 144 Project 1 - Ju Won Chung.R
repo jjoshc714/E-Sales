@@ -28,17 +28,12 @@ sales_total <- as.numeric(gsub(",","",sales_total[,1]))
 #subset only sales values in column 1 and remove commas as a numeric    
 
 
-par(mfrow = c(2,1))                                   #shrink plot window size to fit two rows, one column view
-plot(sales_em, main = "Retail Sales: Electronic Shopping and \nMail-Order Houses", 
-     xlab = "Time", ylab = "$ in millions")           #re-plot sales_em with recession bands
-nberShade()
-lines(sales_em)
-plot(t, sales_total, type = "l", main = "Retail Sales: Total (including Food Services)",                                                
-     xlab = "Time", ylab = "$ in millions")           #plot sales_total with recession bands
-nberShade()
-lines(t, sales_total, col = "navyblue")
-par(mfrow = c(1,1))                                
-#convert plot windows back to single plot view
+plot(t, sales_em, main = "E&M sales and Total sales", type = "l", ylab = "not to scale", xlab = "Time", yaxt = "n")
+nberShade()                    #recession bands
+lines(sales_em)                #overlay over bands
+par(new = TRUE)                #new plot in same window
+plot(t, sales_total, xaxt = "n", yaxt = "n", type = "l", col = "blue", ylim = c(2000, 570000), ylab = "", xlab = "")
+legend(x = "bottomright", legend = c("E&M Sales", "Total Sales"), col = c("black", "blue"), lty = 1, lwd = 2, cex = 0.85, bty = "n")
 
 ##### c) Plotting ACF/PACF of data
 
@@ -133,15 +128,13 @@ BIC(t_mod1, t_mod2)
 
 ##### i) Using trend model 2 (t_mod2) to forecast 5 years ahead
 
-fore1 <- forecast(t_mod2, h = 60)                              
-#create forecast of model 2 for 60 monthly periods (5 years) as "fore1"
-plot(fore1, main = "Trend Model 2", xlab = "Time", ylab = "lsales_em") #plot fore1
+fore1 <- forecast(t_mod2, h = 60) 
+plot(fore1, main = "Trend Model 2", xlab = "Time", ylab = "lsales_em")
 legend(x = "bottomright", legend = c("80% Prediction Interval", "95% Prediction Interval"), 
-       fill = c("lightsteelblue3", "gray87"), bty = "n", cex = 1)    
-#create legend that corresponds to the prediction intervals
-legend(x = "bottom", "Point Forecast", col = "blue", lty = 1, lwd = 1.5, 
-       bty = "n", cex = 1)                                           
-#create legend that corresponds to the point forecast
+       fill = c("lightsteelblue3", "gray87"), bty = "n", cex = .8)
+legend(x = "bottomleft", "Point Forecast", col = "blue", lty = 1, lwd = 2, 
+       bty = "n", cex = .8)
+#create legend that corresponds to the point forecast and intervals
 
 ### 2. Modeling and Forecasting Seasonality
 
@@ -196,13 +189,12 @@ accuracy(t_mod2)                        #return error metrics of trend model 2 (
 
 ##### e) Using full model (full_mod) to forecast 5 years ahead
 
-fore2 <- forecast(full_mod, h = 60)    #create forecast of full model for 60 monthly periods (5 years) as "fore2"
+fore2 <- forecast(full_mod, h = 60)
 plot(fore2, main = "Full Model", xlab = "Time", ylab = "lsales_em")
-plot(fore2, main = "Full Model", xlab = "Time", ylab = "lsales_em", #zoom into fore2 plot for 2017 to 2025
+plot(fore2, main = "Full Model", xlab = "Time", ylab = "lsales_em",
      xlim = c(2017, 2025))
 legend(x = "bottomright", legend = c("80% Prediction Interval", "95% Prediction Interval"), 
-       fill = c("lightsteelblue3", "gray87"), bty = "n", cex = 1.1)  
-#create legend that accounts for the prediction intervals
+       fill = c("lightsteelblue3", "gray87"), bty = "n", cex = .8)
 legend(x = "bottomleft", "Point Forecast", col = "blue", lty = 1,
-       lwd = 2, bty = "n", cex = 1.1)
-#create legend that accounts for the point forecast
+       lwd = 2, bty = "n", cex = .8)
+#create legend that accounts for the point forecast and intervals

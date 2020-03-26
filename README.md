@@ -7,12 +7,16 @@ in order to create an optimal model. Ultimately, a forecast of 60 months (or 5 y
 ### Overview:
 
 1. Introduction
-* Goals of project, data background
+* goals of project
+* dataset background
 
 2. Results
-* data exploration, creation of trend model, implementing seasonality to create full model
+* data exploration
+* creation of trend model
+* implementing seasonality to create full model
 
 3. Conclusions and Future Work
-* final insights, possible improvements to make
+* final insights
+* potential future improvements
 
 4. References

@@ -20,3 +20,5 @@ in order to create an optimal model. Ultimately, a forecast of 60 months (or 5 y
 * potential future improvements
 
 4. References
+* https://fred.stlouisfed.org/series/MRTSSM4541USN?utm_source=series_page&utm_medium=related_content&utm_term=other_formats&utm_campaign=other_format
+* https://www.census.gov/econ/currentdata/dbsearch?program=MRTS&startYear=1992&endYear=2019&categories=44X72&dataType=SM&geoLevel=US&notAdjusted=1&submit=GET+DATA&releaseScheduleId=
